@@ -1,3 +1,4 @@
+const mysql = require('mysql2');
 const { Review } = require("../models");
 
 // Fetch all reviews for a specific book

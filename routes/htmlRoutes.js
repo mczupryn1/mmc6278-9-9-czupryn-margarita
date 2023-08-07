@@ -1,10 +1,12 @@
 const router = require("express").Router();
 const controllers = require("../controllers");
+const booksController = require('../controllers/books');
 
 // Home route
 router.get("/", (req, res) => {
   res.render("index");
 });
+router.get('/:bookId', booksController.getBookDetails);
 
 // Book details route
 router.get("/books/details/:id", async (req, res) => {

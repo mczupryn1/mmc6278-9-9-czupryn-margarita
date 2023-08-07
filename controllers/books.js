@@ -1,54 +1,79 @@
+const mysql = require('mysql2');
 const { Book } = require("../models");
+const { searchBooks, getBookById } = require('../utils/bookService');
+const Review = require('../models/review'); // Assuming you have a Review model
+const { findById, findReviewsByBookId } = require('../models/book');
+
 
 // Fetch all books
-async function getAllBooks() {
+async function getAllBooks(req, res) {
     try {
         const books = await Book.findAll();
-        return books;
+        res.json(books);
     } catch (err) {
         console.error("Error fetching all books:", err);
-        throw err;
+        res.status(500).json({ message: "Error fetching books." });
     }
 }
 
-// Fetch details of a single book by its ID
-async function getBookDetails(bookId) {
+async function searchBookController(req, res) {
+    const query = req.query.q;  
+    const books = await searchBooks(query);
+    if (books) {
+        res.json(books);
+    } else {
+        res.status(500).json({ message: "Error fetching books." });
+    }
+}
+
+
+async function getBookDetails(req, res) {
     try {
-        const book = await Book.findById(bookId);
-        if (!book) {
-            throw new Error("Book not found");
-        }
-        return book;
+        const bookId = req.params.bookId;
+        const book = await findById(bookId);
+        const reviews = await findReviewsByBookId(bookId);
+
+        res.render("book-detail", { 
+            book: book,
+            reviews: reviews
+        });
     } catch (err) {
-        console.error(`Error fetching book details for ID ${bookId}:`, err);
-        throw err;
+        console.error("Error fetching book details for ID " + bookId, err);
+        res.status(500).send("Error fetching book details");
     }
 }
 
-// Add a new book
-async function addBook(bookData) {
+
+async function addBook(req, res) {
     try {
+        const bookData = req.body; // Get the book data from the request body
         const newBook = await Book.create(bookData);
-        return newBook;
+
+        // Redirect to the book-detail page for the newly created book
+        res.redirect(`/books/${newBook.id}`);
     } catch (err) {
         console.error("Error adding new book:", err);
-        throw err;
+        res.status(500).send('Error adding new book.');
     }
 }
 
-// Edit details of a book
-async function editBook(bookId, updatedData) {
+async function editBook(req, res) {
     try {
+        const bookId = req.params.bookId;
+        const updatedData = req.body;
+        
         const book = await Book.findById(bookId);
         if (!book) {
             throw new Error("Book not found");
         }
 
-        const updatedBook = await book.update(updatedData);
-        return updatedBook;
+        await book.update(updatedData);
+
+        // Redirect to the book-detail page after editing
+        res.redirect(`/books/${bookId}`);
     } catch (err) {
         console.error(`Error editing book with ID ${bookId}:`, err);
-        throw err;
+        res.status(500).send('Error editing book.');
     }
 }
 
@@ -70,6 +95,7 @@ async function deleteBook(bookId) {
 
 module.exports = {
     getAllBooks,
+    searchBookController,  // Don't forget to export this
     getBookDetails,
     addBook,
     editBook,

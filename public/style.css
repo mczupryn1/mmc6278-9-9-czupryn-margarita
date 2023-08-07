@@ -1,24 +1,22 @@
 :root {
-  --black: #020303;
-  --dark-grey: #171c1c;
-  --light-grey: #a7b9b7;
-  --primary: #5cc1bb;
-  --primary-dark: #41aaa3;
-  --secondary: hsl(15deg 100% 62%);
-  --secondary-light: hsl(15deg 100% 70%);
-  --text-color: #f5fffe;
-  --space: 16px;
-  --font-size: 18px;
+  /* Book-themed colors */
+  --background: #f9f2e8;
+  --text-color: #362c2a;
+  --primary: #8f775f;
+  --secondary: #bd9373;
+  --accent: #9c443c;
+  --font-size: 20px;
+  --line-height: 1.6;
 }
 
 body {
-  background-color: var(--primary-dark);
+  background-color: var(--background);
   color: var(--text-color);
   font-size: var(--font-size);
-  line-height: 1.5;
+  line-height: var(--line-height);
   padding: 0;
   margin: 0;
-  font-family: helvetica;
+  font-family: 'Helvetica', sans-serif;
   display: flex;
   flex-direction: column;
   min-height: 100vh;
@@ -29,28 +27,34 @@ main {
   width: 100%;
   max-width: 960px;
   margin: 0 auto;
-  background-color: var(--black);
-  padding: var(--space) calc(var(--space) * 3);
+  background-color: #fff;
+  padding: 20px;
   text-align: center;
-}
-
-main,
-main form {
-  border-radius: 4px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
 }
 
 h1 {
-  font-size: calc(var(--font-size) * 2.25);
+  font-size: calc(var(--font-size) * 2.5);
+  color: var(--primary);
+  margin-bottom: 20px;
 }
+
 h2 {
   font-size: calc(var(--font-size) * 2);
+  color: var(--secondary);
+  margin-bottom: 15px;
 }
+
 h3 {
-  font-size: calc(var(--font-size) * 1.5);
+  font-size: calc(var(--font-size) * 1.8);
+  color: var(--accent);
+  margin-bottom: 10px;
 }
 
 a {
-  color: var(--secondary-light);
+  color: var(--accent);
+  text-decoration: none;
   transition: color 200ms;
 }
 a:hover,
@@ -59,72 +63,51 @@ a:focus {
 }
 
 button.btn {
-  border: var(--text-color);
+  border: none;
   border-radius: 4px;
-  background-color: var(--secondary-light);
-  padding: calc(var(--space) * 0.75) calc(var(--space) * 2);
+  background-color: var(--secondary);
+  color: #fff;
+  padding: 12px 24px;
   cursor: pointer;
   transition: background-color 200ms;
-}
-button.btn-text {
-  border: none;
-  background-color: transparent;
-  color: var(--secondary-light);
-  transition: 200ms;
-  cursor: pointer;
 }
 
 button.btn:hover,
 button.btn:focus {
-  background-color: var(--secondary);
-}
-button.btn-text:hover,
-button.btn-text:focus {
-  color: var(--secondary);
-}
-header {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  align-items: center;
-  background-color: var(--black);
-  margin-bottom: calc(var(--space) * 6);
-}
-header a {
-  margin: var(--space);
-}
-header .site-logo {
-  font-size: calc(var(--font-size) * 1.5);
-  margin: var(--space);
-  margin-right: auto;
+  background-color: var(--accent);
 }
 
-.site-logo {
-  text-align: center;
-  color: var(--text-color);
-  text-decoration: none;
-  margin: calc(var(--space) * 4) auto;
-  display: block;
-  font-size: calc(var(--font-size) * 2.5);
-  font-weight: bold;
+header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--background);
+  margin-bottom: 20px;
+}
+
+header .site-logo {
+  font-size: calc(var(--font-size) * 2);
+  color: var(--accent);
+  margin: 0;
 }
 
 .login-form {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: calc(var(--space) * 3) 0;
+  padding: 20px 0;
 }
 
 .login-form .login-error {
-  color: var(--secondary-light);
+  color: var(--accent);
 }
 
 .login-form input {
-  margin-bottom: calc(var(--space) * 2);
-  padding: calc(var(--space) * 0.5) calc(var(--space) * 1);
+  margin-bottom: 15px;
+  padding: 10px 20px;
+  border: 1px solid var(--accent);
+  border-radius: 4px;
 }
-
 @media screen and (max-width: 700px) {
   .site-logo {
     font-size: calc(var(--font-size) * 1.25);

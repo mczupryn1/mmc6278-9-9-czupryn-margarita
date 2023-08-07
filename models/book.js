@@ -5,6 +5,11 @@ async function findAll() {
     return books;
 }
 
+async function findReviewsByBookId(bookId) {
+    const [reviews] = await db.query(`SELECT * FROM reviews WHERE book_id=?`, bookId);
+    return reviews;
+}
+
 async function findById(bookId) {
     const [[book]] = await db.query(
         `SELECT * FROM books WHERE id=?`,
@@ -19,7 +24,7 @@ async function create(bookData) {
         title, author, description, thumbnail, isbn
     ]);
     
-    // Return the book details based on the last inserted ID (this method may vary based on your DB setup)
+    // Return the book details based on the last inserted ID
     return findById(/* lastInsertedIdHere */);
 }
 
@@ -39,6 +44,7 @@ async function destroy(bookId) {
 
 module.exports = {
     findAll,
+    findReviewsByBookId,
     findById,
     create,
     update,
