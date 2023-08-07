@@ -1,0 +1,38 @@
+{{> header}}
+<main>
+<div class="container">
+    <h1>Book Details</h1>
+
+    <!-- Book Detailed Information -->
+    <div class="book-detail">
+        <img src="{{book.thumbnail}}" alt="Cover image for {{book.title}}" width="200">
+        <h2>{{book.title}}</h2>
+        <h3>Author: {{book.author}}</h3>
+        <p>{{book.description}}</p>
+    </div>
+
+    <!-- List of reviews for the book -->
+    <h2>Reviews</h2>
+    <ul class="review-list">
+        {{#each reviews}}
+        <li class="review-item">
+            <p>{{this.text}}</p>
+            <div class="review-actions">
+                <a href="/reviews/edit/{{this.id}}" class="btn btn-warning">Edit</a>
+                <a href="/reviews/delete/{{this.id}}" class="btn btn-danger">Delete</a>
+            </div>
+        </li>
+        {{/each}}
+    </ul>
+
+    <!-- Option to add a new review -->
+    <div class="add-review">
+        <a href="/reviews/add/{{book.id}}" class="btn btn-success">Add a Review</a>
+    </div>
+
+    <!-- Back button -->
+    <div class="back-to-home">
+        <a href="/" class="btn btn-secondary">Back to Home</a>
+    </div>
+</div>
+</main>

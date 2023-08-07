@@ -1,0 +1,33 @@
+{{> header}}
+<main>
+    <div class="container">
+    <h1>{{#if review}}Edit{{else}}Add{{/if}} Review</h1>
+
+    <form action="{{#if review}}/reviews/edit/{{review.id}}{{else}}/reviews/add{{/if}}" method="post">
+        <div class="form-group">
+            <label for="rating">Rating:</label>
+            <select id="rating" name="rating" required>
+                <option value="1" {{#if (eq review.rating 1)}}selected{{/if}}>1</option>
+                <option value="2" {{#if (eq review.rating 2)}}selected{{/if}}>2</option>
+                <option value="3" {{#if (eq review.rating 3)}}selected{{/if}}>3</option>
+                <option value="4" {{#if (eq review.rating 4)}}selected{{/if}}>4</option>
+                <option value="5" {{#if (eq review.rating 5)}}selected{{/if}}>5</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="text">Review Text:</label>
+            <textarea id="text" name="text" rows="4" required>{{review.text}}</textarea>
+        </div>
+
+        <div class="form-group">
+            <label for="reviewer">Reviewer's Name:</label>
+            <input type="text" id="reviewer" name="reviewer" value="{{review.reviewer}}" required>
+        </div>
+
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary">Save Review</button>
+        </div>
+    </form>
+</div>
+</main>

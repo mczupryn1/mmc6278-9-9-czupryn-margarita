@@ -1,0 +1,21 @@
+{{> header}}
+<main>
+<div class="container">
+    <h1>Recommended Books</h1>
+    
+    <!-- List of Recommended Books -->
+    <ul class="recommendation-list">
+        {{#each recommendedBooks}}
+        <li class="book-item">
+            <img src="{{this.thumbnail}}" alt="Cover image for {{this.title}}" width="100">
+            <div class="book-info">
+                <h2>{{this.title}}</h2>
+                <p>{{this.description}}</p>
+                <a href="/books/details/{{this.id}}" class="btn btn-info">View More</a>
+            </div>
+        </li>
+        {{/each}}
+    </ul>
+
+</div>
+</main>

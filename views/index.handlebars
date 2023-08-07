@@ -1,7 +1,31 @@
 {{> header}}
 <main>
-  <h1>This is the home page!</h1>
-  <p>Currently, you are {{#unless isLoggedIn}} NOT {{/unless}} logged in.</p>
-  <p>You should {{#unless isLoggedIn}}NOT{{/unless}} be able to access <a href="/private">this page</a>.</p>
-  <p>Use the header above to {{#if isLoggedIn}} logout{{else}} login or create an account{{/if}}.</p>
+<div class="container">
+    <h1>Reviewed Books</h1>
+
+    <ul class="book-list">
+        {{#each books}}
+        <li class="book-item">
+            <!-- Book thumbnail -->
+            <img src="{{this.thumbnail}}" alt="Cover image for {{this.title}}" width="100">
+
+            <!-- Book title and description -->
+            <div class="book-info">
+                <h2>{{this.title}}</h2>
+                <p>{{this.description}}</p>
+            </div>
+
+            <!-- Buttons for more details and reviews -->
+            <div class="book-actions">
+                <a href="/books/{{this.id}}" class="btn btn-primary">View Details & Reviews</a>
+            </div>
+        </li>
+        {{/each}}
+    </ul>
+
+    <!-- Option to add a new book -->
+    <div class="add-book">
+        <a href="/books/add" class="btn btn-success">Add a New Book</a>
+    </div>
+</div>
 </main>
