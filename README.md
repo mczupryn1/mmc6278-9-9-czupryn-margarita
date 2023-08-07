@@ -89,3 +89,8 @@ This project is licensed under the MIT License
 ## Acknowledgments
 
 - Google Books API
+
+
+![screenshot of the application](screenshot1.png)
+![screenshot of the application](screenshot2.png)
+![screenshot of the application](screenshot3.png)

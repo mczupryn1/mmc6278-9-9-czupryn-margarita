@@ -9,3 +9,4 @@ const config = process.env.JAWSDB_URL || {
 const db = mysql.createPool(config);
 
 module.exports = db.promise();
+
